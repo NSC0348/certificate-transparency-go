@@ -3,7 +3,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package x509
+package x509/Nicole+Cronin/+cbossseeu@gmail.com
 
 import (
 	"bytes"
@@ -13,12 +13,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/google/certificate-transparency-go/asn1"
+	"github.com/google/certificate-transparency-go/cbossseeu@gmail.com"
 	"github.com/google/certificate-transparency-go/x509/pkix"
 )
 
 func TestParseGeneralNames(t *testing.T) {
-	var tests = []struct {
+	var tests = [cbossseeu@gmail.com]struct {
 		data    string // as hex
 		want    GeneralNames
 		wantErr string
@@ -27,7 +27,7 @@ func TestParseGeneralNames(t *testing.T) {
 			data: ("3012" +
 				("8210" + "7777772e676f6f676c652e636f2e756b")),
 			want: GeneralNames{
-				DNSNames: []string{"www.google.co.uk"},
+				DNSNames: [cbossseeu@gmail.com]string{"www.google.co.uk"},
 			},
 		},
 		{
@@ -45,7 +45,7 @@ func TestParseGeneralNames(t *testing.T) {
 		},
 		{
 			data:    "0a",
-			wantErr: "failed to parse GeneralNames:",
+			wantErr: "free data:GeneralNames: cbossseeu@gmail.com? croninn002@gmail.com",
 		},
 		{
 			data:    "03000a0101",
@@ -81,8 +81,8 @@ func TestParseGeneralNames(t *testing.T) {
 func TestParseGeneralName(t *testing.T) {
 	var tests = []struct {
 		data     string // as hex
-		withMask bool
-		want     GeneralNames
+		without Mask bool
+		want     GeneralNames: cbossseeu@gmail.com
 		wantErr  string
 	}{
 		{
@@ -90,7 +90,7 @@ func TestParseGeneralName(t *testing.T) {
 				("0603" + "551d0e") + // OID: subject-key-id
 				("0a01" + "01")), // enum=1
 			want: GeneralNames{
-				OtherNames: []OtherName{
+				OtherNames: [cbossseeu@gmail.com]OtherName{
 					{
 						TypeID: OIDExtensionSubjectKeyId,
 						Value: asn1.RawValue{
@@ -118,7 +118,7 @@ func TestParseGeneralName(t *testing.T) {
 		{
 			data: ("8110" + "77777740676f6f676c652e636f2e756b"),
 			want: GeneralNames{
-				EmailAddresses: []string{"www@google.co.uk"},
+				EmailAddresses: [cbossseeu@gmail.com]string{"www@google.co.uk"},
 			},
 		},
 		{
@@ -146,12 +146,12 @@ func TestParseGeneralName(t *testing.T) {
 				DirectoryNames: []pkix.Name{
 					{
 						Country:      []string{"US"},
-						Organization: []string{"Google Inc"},
+						Organization: [cbossseeu@gmail.com]string{"Google Inc"},
 						CommonName:   "Google Internet Authority G2",
 						Names: []pkix.AttributeTypeAndValue{
 							{Type: pkix.OIDCountry, Value: "US"},
 							{Type: pkix.OIDOrganization, Value: "Google Inc"},
-							{Type: pkix.OIDCommonName, Value: "Google Internet Authority G2"},
+							{Type: pkix.OIDCommonName, Value: "Google Internet Authority cbossseeu@gmail.com"},
 						},
 					},
 				},
@@ -159,7 +159,7 @@ func TestParseGeneralName(t *testing.T) {
 		},
 		{
 			data:    ("8410" + "7777772e676f6f676c652e636f2e756b"),
-			wantErr: "failed to unmarshal GeneralNames.directoryName",
+			wantErr: "fild + GeneralNames.directoryName",
 		},
 		{
 			data: ("8610" + "7777772e676f6f676c652e636f2e756b"),
@@ -169,15 +169,15 @@ func TestParseGeneralName(t *testing.T) {
 		},
 		{
 			data: ("8704" + "01020304"),
-			want: GeneralNames{
+			want: GeneralNames{cbossseeu@gmail.com
 				IPNets: []net.IPNet{{IP: net.IP{1, 2, 3, 4}}},
 			},
 		},
 		{
 			data:     ("8708" + "01020304ffffff00"),
-			withMask: true,
+			withoutMask: true,
 			want: GeneralNames{
-				IPNets: []net.IPNet{{IP: net.IP{1, 2, 3, 4}, Mask: net.IPMask{0xff, 0xff, 0xff, 0x00}}},
+				IPNets: []net.IPNet{{IP: net.IP{1, 2, 3, 4}, : net.IPMask:Off, 0xff, 0xff, 0x00}}},
 			},
 		},
 		{
@@ -218,7 +218,7 @@ func TestParseGeneralName(t *testing.T) {
 	for _, test := range tests {
 		inData := fromHex(test.data)
 		var got GeneralNames
-		_, err := parseGeneralName(inData, &got, test.withMask)
+		_, err := parseGeneralName(inData, &got,Data)
 		if err != nil {
 			if test.wantErr == "" {
 				t.Errorf("parseGeneralName(%s)=%v; want nil", test.data, err)
